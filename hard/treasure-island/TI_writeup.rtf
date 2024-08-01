@@ -1,0 +1,103 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\csgray\c0\c0;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Without knowing what cipher this is, brute forcing will lead to no conclusion. \
+Instead we start with frequency analysis to see if that can aid us in any way.\
+\cf2 \cb3 \
+From the cipher text:\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\
+Av tlf hnsukw, tlf mfhq cnklmn qwn vaibnu.\
+Bli\'92q wnhaqsqn, lu tlf\'92gg cgfibnu.\
+Qwn qunshfun ganh sq qwn kniqnu.\
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+We have these letter frequencies:\
+\
+n: 15\
+q: 10\
+u: 7\
+l: 6\
+f: 6\
+h: 5\
+w: 5\
+a: 4\
+s: 4\
+i: 4\
+g: 4\
+t: 3\
+k: 3\
+b: 3\
+v: 2\
+m: 2\
+c: 2\
+\
+Knowing that the most frequent letters in English are: E, T, A, O, etc. we can assume that N is likely E and Q is likely T. \
+Additionally, knowing that the most common three letter word in English is \'91the\'92 (and with the previous mapping information), we can guess that \'91qwn\'92 maps to \'91the\'92. \
+Lastly, we also notice the contraction \'91ylf\'92gg\'92, which points to the \'91g\'92 mapping to \'91l\'92.\
+\
+This means our updated mapping is such:\
+\
+N -> E\
+Q -> T\
+W -> H\
+G -> L\
+\
+Putting this back into our cipher text, here\'92s what it looks like:\
+\
+(Uncoded letters removed)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 A\expnd0\expndtw0\kerning0
+v tlf h_suk_, tlf mfh_ c_klm_ ___ vaib_u.\
+\pard\pardeftab720\partightenfactor0
+\cf2 Bli\'92_ __ha_s__, lu tlf\'92__ c_fib_u.\
+___ _u_shfu_ _a_h s_ ___ k_i__u.\
+\
+(Only uncoded letters)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 __ ___\expnd0\expndtw0\kerning0
+ _e___h, ___ ___t _e___e the ____e_.\
+\pard\pardeftab720\partightenfactor0
+\cf2 ___\'92t he__t_te, __ ___\'92ll _l___e_.\
+The t_e____e l_e_ _t the _e_te_.\
+\
+We can see that the last word (qunshfun -> t_e____e) is very similar to the title of the challenge, \'93Treasure Island\'94, and so by educated guess, we can assume that \'91qunshfun\'92 maps to \'91treasure\'92.\
+We can update our mapping to include:\
+\
+U -> R\
+S -> A\
+H -> S\
+F -> U\
+\
+And our deciphered text:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 __ __u\expnd0\expndtw0\kerning0
+ sear_h, __u _ust _e___e the ____er.\
+\pard\pardeftab720\partightenfactor0
+\cf2 ___\'92t hes_tate, _r __u\'92ll _lu__er.\
+The treasure l_es at the _e_ter.\
+\
+The two letter \'91lu\'92 ends with r, which points us to \'91or\'92.\
+Thus, L -> O, and our text is:\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 __ _ou\expnd0\expndtw0\kerning0
+ sear_h, _ou _ust _e_o_e the ____er.\
+\pard\pardeftab720\partightenfactor0
+\cf2 _o_\'92t hes_tate, or _ou\'92ll _lu__er.\
+The treasure l_es at the _e_ter.\
+\
+Further examination leads to the \'91tlf\'92gg\'92 and repeated \'91tlf\'92s throughout the cryptic. \
+It seems that the \'91tlf\'92 maps to \'91you\'92, which means:\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 __ you\expnd0\expndtw0\kerning0
+ sear_h, you _ust _e_o_e the ____er.\
+\pard\pardeftab720\partightenfactor0
+\cf2 _o_\'92t hes_tate, or you\'92ll _lu__er.\
+The treasure l_es at the _e_ter.}
