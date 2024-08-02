@@ -1,0 +1,68 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 ANSWER: CTF\{THE_SECRET_LIES_IN_THE_FLAVOR\}\
+\
+Here are the clues we\'92ve been given:\
+\
+	the note was found on the sixth floor\
+	the note was found behind columns\
+	the only thing you can read on the note is the word \'91recipe\'92\
+\
+Knowing that the note was found behind columns points us to using a columnar transposition cipher.\
+Coincidentally, (or not), \'91recipe\'92 has the six letters, which matches the sixth floor clue. Thus, we can deduce that the key should be 6 letters longs, so we\'92ll have six columns. Again, by some supernatural coincidence, recipe fits our 6 letter requirement, and seems to be the only valid option we have for a key so far.\
+\
+We can start off by arranging the cipher text into six columns:\
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 \expnd0\expndtw0\kerning0
+ECHSET\
+TEELIR\
+NEITHS\
+ARLVOF\
+\
+Then, we can line up the scrambled key with the text. Traditionally, it is permuted by alphabetical order, thus, our cipher now looks like this:\
+\
+CEEIPR\
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 ECHSET\
+TEELIR\
+NEITHS\
+ARLVOF\
+\
+We can then descramble the cipher to the original message, by reordering the cipher text with the key when unscrambled.\
+\
+RECIPE\
+\
+TCESEH\
+RETLIE\
+SENTHI\
+FRAVOL\
+\
+While we\'92ve technically finished, we can obviously see that our deciphered text still makes no sense. \
+On closer inspection, we\'92ll realize that we might have made an error.\
+In the key \'91recipe\'92, there are two E\'92s, which we might have ordered incorrectly, which gives us a completely different answer.\
+\
+When reordered, here\'92s what we get:\
+\
+RECIPE\
+\
+THESEC\
+RETLIE\
+SINTHE\
+FLAVOR\
+\
+Written in one string, we get:\
+\
+THESECRETLIESINTHEFLAVOR\
+\
+Adding spaces gives us our answer:\
+\
+CTF\{THE_SECRET_LIES_IN_THE_FLAVOR\}\
+\
+Congrats detective! You got out safely and obtained the secret. Now, what will you do with it?}
