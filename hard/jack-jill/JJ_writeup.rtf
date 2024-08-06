@@ -11,7 +11,7 @@
 \
 From the matrix hint and the all capitalized \'93HILL\'94, we can assume that this uses the Hill Cipher.\
 \
-Out first step is to convert the cipher text into number, assuming that A=1, Y=25, and Z=0.\
+Our first step is to convert the cipher text into number, assuming that A=1, Y=25, and Z=0.\
 \
 W   P  O D A B\
 23 16 15 4 1 2\
@@ -60,4 +60,23 @@ K\super -1\nosupersub = ( 1 / (ad - bc) ) ( [ d -b, -c a] )\
 \
 \\ [ K^-1 = \cf2 \cb3 \outl0\strokewidth0 \strokec4 (\\frac\{1\}\{ad - bc\})\cf2 \cb3 \outl0\strokewidth0  \\begin\{bmatrix\} d & -b\\\\ -c & a \\end\{bmatrix\} ] \\\
 \
-}
+K\super -1\nosupersub = \\begin\{bmatrix\} 7 & -3\\\\ -9 & 4 \\end\{bmatrix\}\
+\
+[ 7  -3]\
+[-9   4]\
+\
+Multiplying the inverse matrix with the cipher text vectors produce our original results:\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 [23] [15] [ 1 ]\
+[16] [ 4 ] [ 2 ]\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \expnd0\expndtw0\kerning0
+[ 7  -3] [23] = [ 113]\
+[-9   4] [16]    [-143]\
+\
+\
+Using a solver, WPODAB is decrypted to IMOKAY\
+\
+// math currently not working (oops), solving out right now}
