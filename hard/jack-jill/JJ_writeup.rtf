@@ -13,33 +13,33 @@ From the matrix hint and the all capitalized \'93HILL\'94, we can assume that th
 \
 Our first step is to convert the cipher text into number, assuming that A=1, Y=25, and Z=0.\
 \
-W   P  O D A B\
-23 16 15 4 1 2\
+Q  A .I  O  U  M\
+16 0 8 14 20 12\
 \
 Our second step is to rearrange the cipher text we have.\
 Rewriting it into 2x1 vectors can help us understand our next step better.\
 \cf2 \cb3 \
-[23] [15] [ 1 ]\
-[16] [ 4 ] [ 2 ]\
+[16] [ 8 ] [20]\
+[ 0 ] [14] [12]\
 \
 \pard\pardeftab720\partightenfactor0
 \cf2 \expnd0\expndtw0\kerning0
 \outl0\strokewidth0 \strokec4 \\begin\{bmatrix\}\
-23\\\\\
-16\
+16\\\\\
+0\
 \\end\{bmatrix\}\kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf2 \
 \pard\pardeftab720\partightenfactor0
 \cf2 \cb3 \expnd0\expndtw0\kerning0
 \\begin\{bmatrix\}\
-15\\\\\
-4\
+8\\\\\
+14\
 \\end\{bmatrix\}\
 \
 \\begin\{bmatrix\}\
-1\\\\\
-2\
+20\\\\\
+12\
 \\end\{bmatrix\}\
 \cf2 \cb3 \kerning1\expnd0\expndtw0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
@@ -67,16 +67,40 @@ K\super -1\nosupersub = \\begin\{bmatrix\} 7 & -3\\\\ -9 & 4 \\end\{bmatrix\}\
 \
 Multiplying the inverse matrix with the cipher text vectors produce our original results:\
 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 [16] [ 8 ] [20]\
+[ 0 ] [14] [12]\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\pardirnatural\partightenfactor0
-\cf2 \kerning1\expnd0\expndtw0 [23] [15] [ 1 ]\
-[16] [ 4 ] [ 2 ]\
-\
+\cf2 \
 \pard\pardeftab720\partightenfactor0
 \cf2 \expnd0\expndtw0\kerning0
-[ 7  -3] [23] = [ 113]\
-[-9   4] [16]    [-143]\
+[ 7  -3] [16] = [ 112]\
+[-9   4] [ 0 ]    [-144]\
 \
+\pard\pardeftab720\partightenfactor0
+\cf2 [ 7  -3] [ 8 ] = [ 14]\
+[-9   4] [14]    [-16]\
 \
-Using a solver, WPODAB is decrypted to IMOKAY\
+[ 7  -3] [20] = [ 104]\
+[-9   4] [12]    [-132]\
 \
-// math currently not working (oops), solving out right now}
+Simplifying our results with mod(26) results in the decoded expression translated to numbers:\
+\
+[ 112] = [ 8 ]\
+[-144]    [12]\
+\
+[ 14] = [14]\
+[-16]    [10]\
+\
+[ 104] = [ 0 ]\
+[-132]    [24]\
+\
+Our final message in numerical form is:\
+\
+8 12 14 10 0 24\
+\
+Following the standard numerical/alphabetical decryption, where A=0 and Z=25, we now have:\
+\
+IMOKAY\
+\
+Thus, the message is CTF\{IMOKAY\}}
