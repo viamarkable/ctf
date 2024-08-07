@@ -1,67 +1,6 @@
 import java.util.Scanner;
 
 class caesarCipher {
-    public static void main(String[] args) {
-        Scanner question = new Scanner(System.in);
-        System.out.println("Do you want to encrypt text? (y/n)");
-
-        String aEncrypt = question.nextLine();
-        String plaintext = "";
-        String ciphertext = "";
-        
-        int key = 0;
-
-        if (aEncrypt.contains("y")) {
-            System.out.println("What would you like to encrypt?");
-            plaintext = question.nextLine();
-
-            System.out.println("What is your key?");
-            key = question.nextInt();
-            question.nextLine();
-
-            System.out.println("Encrypting " + plaintext + " ...");
-
-            StringBuffer encryptedText = encrypt(plaintext, key);
-            System.out.println("Encrypted Text: " + encryptedText);
-        } else if (aEncrypt.contains("n")) {
-            System.out.println("Do you want to decrypt text? (y/n)");
-
-            String aDecrypt = question.nextLine();
-
-            if (aDecrypt.contains("y")) {
-                System.out.println("What would you like to decrypt?");
-                ciphertext = question.nextLine();
-
-                System.out.println("Do you know the key? (y/n)");
-                String aKey = question.nextLine();
-
-                if (aKey.contains("y")) {
-                    System.out.println("What is your key?");
-                    key = question.nextInt();
-                    question.nextLine();
-
-                    System.out.println("Decrypting " + ciphertext + " ...");
-
-                    StringBuffer decryptedText = decrypt(plaintext, key);
-                    System.out.println("Decrypted Text: " + decryptedText);
-                } else {
-                    System.out.println("Decrypting " + ciphertext + " through brute force...");
-
-                    for (int i = 0; i < 26; i++) {
-                        StringBuffer bruteForceResult = decrypt(ciphertext, i);
-                        System.out.println("Key " + (i+1) + ": " + bruteForceResult);
-                    }
-                }
-            } else {
-                System.out.println("Error: please re-run the program");
-            }
-
-        } else {
-            System.out.println("Error: please re-run and answer with 'y' or 'n'");
-        }
-        question.close();
-    }
-
     public static StringBuffer encrypt(String plaintext, int s) {
         StringBuffer result = new StringBuffer();
 
@@ -76,7 +15,6 @@ class caesarCipher {
         }
         return result;
     }
-
     public static StringBuffer decrypt(String ciphertext, int s) {
         StringBuffer result = new StringBuffer();
 
@@ -90,5 +28,57 @@ class caesarCipher {
             }
         }
         return result; 
+    }
+
+    public static void main(String[] args) {
+        Scanner question = new Scanner(System.in);
+        System.out.println("Do you want to encrypt or decrypt text? (encrypt/decrypt)");
+
+        String function = question.nextLine();
+        String plaintext = "";
+        String ciphertext = "";
+        
+        int key = 0;
+
+        if (function.contains("encrypt")) {
+            System.out.println("What is the plaintext that you would like to encrypt?");
+            plaintext = question.nextLine();
+
+            System.out.println("What is the key you want to use for encryption?");
+            key = question.nextInt();
+            question.nextLine();
+
+            System.out.println("Encrypting " + plaintext + " ...");
+
+            StringBuffer encryptedText = encrypt(plaintext, key);
+            System.out.println("Encrypted Text: " + encryptedText);
+        } else if (function.contains("decrypt")) {
+            System.out.println("What is the ciphertext that you would like to decrypt?");
+            ciphertext = question.nextLine();
+
+            System.out.println("Do you know the key that was used for encryption? (y/n)");
+            String aKey = question.nextLine();
+
+            if (aKey.contains("y")) {
+                System.out.println("What was the key used for encryption?");
+                key = question.nextInt();
+                question.nextLine();
+
+                System.out.println("Decrypting " + ciphertext + " ...");
+
+                StringBuffer decryptedText = decrypt(plaintext, key);
+                System.out.println("Decrypted Text: " + decryptedText);
+            } else {
+                System.out.println("Decrypting " + ciphertext + " through brute force...");
+
+                for (int i = 0; i < 26; i++) {
+                    StringBuffer bruteForceResult = decrypt(ciphertext, i);
+                    System.out.println("Key " + (i+1) + ": " + bruteForceResult);
+                }
+            }
+        } else {
+            System.out.println("Error: please re-run and answer with 'y' or 'n'");
+        }
+        question.close();
     }
 }
