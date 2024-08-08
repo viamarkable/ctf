@@ -41,10 +41,10 @@ class caesarCipher {
         int key = 0;
 
         if (function.contains("encrypt")) {
-            System.out.println("What is the plaintext that you would like to encrypt?");
+            System.out.println("Enter the plaintext that you would like to encrypt:");
             plaintext = question.nextLine();
 
-            System.out.println("What is the key you want to use for encryption?");
+            System.out.println("Enter the key you would like to use for encryption:");
             key = question.nextInt();
             question.nextLine();
 
@@ -53,14 +53,14 @@ class caesarCipher {
             StringBuffer encryptedText = encrypt(plaintext, key);
             System.out.println("Encrypted Text: " + encryptedText);
         } else if (function.contains("decrypt")) {
-            System.out.println("What is the ciphertext that you would like to decrypt?");
+            System.out.println("Enter the ciphertext that you would like to decrypt:");
             ciphertext = question.nextLine();
 
             System.out.println("Do you know the key that was used for encryption? (y/n)");
             String aKey = question.nextLine();
 
             if (aKey.contains("y")) {
-                System.out.println("What was the key used for encryption?");
+                System.out.println("Enter the key used for encryption:");
                 key = question.nextInt();
                 question.nextLine();
 
@@ -77,7 +77,7 @@ class caesarCipher {
                 }
             }
         } else {
-            System.out.println("Error: please re-run and answer with 'y' or 'n'");
+            System.out.println("Error: please re-run and try again");
         }
         question.close();
     }

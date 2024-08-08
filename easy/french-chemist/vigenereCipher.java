@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class vigenereCipher {
+class vigenereCipher {
     public static String generateKey(String str, String key) {
         int x = str.length();
         for (int i = 0; ; i++) {
@@ -33,17 +33,16 @@ public class vigenereCipher {
     public static String decrypt(String ciphertext, String key) {
         StringBuilder plaintext = new StringBuilder();
 
-        //reverse the process
         for (int i = 0; i < ciphertext.length(); i++) {
             char ciphertextChar = plaintext.charAt(i);
             char keyChar = key.charAt(i);
 
             if (Character.isUpperCase(ciphertextChar)) {
-                int x = (ciphertextChar + Character.toUpperCase(keyChar) - 2 * 'A') % 26;
+                int x = (ciphertextChar - Character.toUpperCase(keyChar) + 26) % 26;
                 x += 'A';
                 plaintext.append((char) x);
             } else if (Character.isLowerCase(ciphertextChar)) {
-                int x = (ciphertextChar + Character.toUpperCase(keyChar) - 2 * 'a') % 26;
+                int x = (ciphertextChar - Character.toUpperCase(keyChar) + 26) % 26;
                 x += 'a';
                 plaintext.append((char) x);
             } else {
@@ -58,18 +57,36 @@ public class vigenereCipher {
         System.out.println("Do you want to encrypt or decrypt text? (encrypt/decrypt)");
 
         String function = question.nextLine();
+
         String plaintext = "";
         String ciphertext = "";
+        String key = "";
 
         if (function.contains("encrypt")) {
-            System.out.println("What is the plaintext that you would like to encrypt?");
+            System.out.println("Enter the plaintext that you would like to encrypt:");
             plaintext = question.nextLine();
 
+            System.out.println("Enter the key you would like to use for encryption:");
+            key = question.nextLine();
+
+            System.out.println("Encrypting " + plaintext + " ...");
+
+            String encryptedText = encrypt(plaintext, key);
+            System.out.println("Encrypted Text: " + encryptedText);
         } else if (function.contains("decrypt")) {
-            System.out.println("What is the ciphertext that you would like to decrypt?");
+            System.out.println("Enter the ciphertext that you would like to decrypt:");
             ciphertext = question.nextLine();
+
+            System.out.println("Enter the key used for encryption:");
+            key = question.nextLine();
+
+            System.out.println("Decrypting " + ciphertext + " ...");
+
+            String decryptedText = decrypt(ciphertext, key);
+            System.out.println("Decrypted Text: " + decryptedText);
+        } else {
+            System.out.println("Error: please re-run and try again");
         }
         question.close();
     }
-    
 }
