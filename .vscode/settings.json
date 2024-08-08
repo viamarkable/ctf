@@ -1,0 +1,17 @@
+{
+    "java.format.settings.url": ".vscode/java-formatter.xml",
+    "java.project.sourcePaths": [
+        ".",
+        "easy/french-chemist",
+        "easy/neighbors-fence",
+        "easy/ballerina-secret",
+        "easy/archeological-dig",
+        "easy/notorious-criminals",
+        "hard/jack-jill",
+        "hard/treasure-island",
+        "hard/recipe-heist",
+        "medium/halloween-number",
+        "medium/stubborn-activist"
+    ],
+    "java.project.referencedLibraries": []
+}
