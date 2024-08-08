@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class vigenereCipher {
+class VigenereCipher {
     public static String generateKey(String str, String key) {
         int x = str.length();
         for (int i = 0; ; i++) {

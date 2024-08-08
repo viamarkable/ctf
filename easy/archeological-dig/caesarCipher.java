@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class caesarCipher {
+class CaesarCipher {
     public static StringBuffer encrypt(String plaintext, int s) {
         StringBuffer result = new StringBuffer();
 
