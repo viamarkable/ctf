@@ -34,97 +34,107 @@ public class RailFenceCipher {
         }
         return result.toString();
     }
- 
-    // This function receives cipher-text and key
-    // and returns the original text after decryption
-    public static String decryptRailFence(String cipher,
-                                          int key)
-    {
- 
-        // create the matrix to cipher plain text
-        // key = rows , length(text) = columns
-        char[][] rail = new char[key][cipher.length()];
- 
-        // filling the rail matrix to distinguish filled
-        // spaces from blank ones
-        for (int i = 0; i < key; i++)
+    public static String decrypt(String ciphertext, int rowCount) {
+        char[][] rail = new char[rowCount][ciphertext.length()];
+        for (int i = 0; i < rowCount; i++) {
             Arrays.fill(rail[i], '\n');
- 
-        // to find the direction
-        boolean dirDown = true;
- 
-        int row = 0, col = 0;
- 
-        // mark the places with '*'
-        for (int i = 0; i < cipher.length(); i++) {
-            // check the direction of flow
-            if (row == 0)
-                dirDown = true;
-            if (row == key - 1)
-                dirDown = false;
- 
-            // place the marker
-            rail[row][col++] = '*';
- 
-            // find the next row using direction flag
-            if (dirDown)
-                row++;
-            else
-                row--;
         }
- 
-        // now we can construct the fill the rail matrix
+
+        boolean dirDown = false;
+        int row = 0, col = 0;
+
+        for (int i = 0; i < ciphertext.length(); i++) {
+            if (row == 0 || row == rowCount - 1) {
+                dirDown = !dirDown;
+
+                rail[row][col++] = '*';
+            }
+
+            if (dirDown) {
+                row ++;
+            } else {
+                row--;
+            }
+        }
+
         int index = 0;
-        for (int i = 0; i < key; i++)
-            for (int j = 0; j < cipher.length(); j++)
-                if (rail[i][j] == '*'
-                    && index < cipher.length())
-                    rail[i][j] = cipher.charAt(index++);
- 
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < ciphertext.length(); j++) {
+                if (rail[i][j] == '*' && index < ciphertext.length()) {
+                    rail[i][j] = ciphertext.charAt(index++);
+                }
+            }
+        }
+
         StringBuilder result = new StringBuilder();
- 
         row = 0;
         col = 0;
-        for (int i = 0; i < cipher.length(); i++) {
-            // check the direction of flow
-            if (row == 0)
-                dirDown = true;
-            if (row == key - 1)
-                dirDown = false;
- 
-            // place the marker
-            if (rail[row][col] != '*')
+        for (int i = 0; i < ciphertext.length(); i++) {
+            if (row == 0 || row == rowCount - 1) {
+                dirDown = !dirDown;
+            }
+            if (rail[row][col] != '*') {
                 result.append(rail[row][col++]);
- 
-            // find the next row using direction flag
-            if (dirDown)
+            }
+            if (dirDown) {
                 row++;
-            else
+            } else {
                 row--;
+            }
         }
         return result.toString();
     }
- 
     // driver program to check the above functions
     public static void main(String[] args)
     {
- 
-        // Encryption
-        System.out.println("Encrypted Message: ");
-        System.out.println(
-            encryptRailFence("attack at once", 2));
-        System.out.println(
-            encryptRailFence("GeeksforGeeks ", 3));
-        System.out.println(
-            encryptRailFence("defend the east wall", 3));
- 
-        // Now decryption of the same cipher-text
-        System.out.println("\nDecrypted Message: ");
-        System.out.println(
-            decryptRailFence("atc toctaka ne", 2));
-        System.out.println(
-            decryptRailFence("GsGsekfrek eoe", 3));
-        System.out.println(
-            decryptRailFence("dnhaweedtees alf  tl", 3));
+        Scanner question = new Scanner(System.in);
+        System.out.println("Do you want to encrypt or decrypt text? (encrypt/decrypt)");
+
+        String function = question.nextLine();
+        String plaintext = "";
+        String ciphertext = "";
+
+        int rowCount = 0;
+
+        if (function.contains("encrypt")) {
+            System.out.println("Enter the plaintext that you would like to encrypt:");
+            plaintext = question.nextLine();
+
+            System.out.println("Enter the amount of rows you would like to use for encryption:");
+            rowCount = question.nextInt();
+            question.nextLine();
+
+            System.out.println("Encrypting " + plaintext + " ...");
+
+            String encryptedText = encrypt(plaintext, rowCount);
+            System.out.println("Encrypted Text: " + encryptedText);
+        } else if (function.contains("decrypt")) {
+            System.out.println("Enter the ciphertext that you would like to decrypt:");
+            ciphertext = question.nextLine();
+
+            System.out.println("Do you know the amount of rows used for encryption? (y/n)");
+            String aKey = question.nextLine();
+
+            if (aKey.contains("y")) {
+                System.out.println("Enter the amount of rows used for encryption:");
+                rowCount = question.nextInt();
+                question.nextLine();
+
+                System.out.println("Decrypting " + ciphertext + " ...");
+
+                String decryptedText = decrypt(plaintext, rowCount);
+                System.out.println("Decrypted Text: " + decryptedText);
+            } else {
+                System.out.println("Decrypting " + ciphertext + " through brute force...");
+
+                for (int i; i < ciphertext.length(); i++) {
+                    String bruteForceResult = decrypt(ciphertext, i);
+                    System.out.println("Key " + i + ": " + bruteForceResult);
+                }
+            }
+        } else {
+            System.out.println("Error: please re-run and try again");
+        }
+        question.close();
     }
 }
