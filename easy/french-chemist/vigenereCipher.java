@@ -10,46 +10,46 @@ class VigenereCipher {
         }
         return key;
     }
-    public static String encrypt(String plaintext, String key) {
-        StringBuilder ciphertext = new StringBuilder();
-        for (int i = 0; i < plaintext.length(); i++) {
-            char plaintextChar = plaintext.charAt(i);
+    public static String encrypt(String plainText, String key) {
+        StringBuilder cipherText = new StringBuilder();
+        for (int i = 0; i < plainText.length(); i++) {
+            char plainTextChar = plainText.charAt(i);
             char keyChar = key.charAt(i);
 
-            if (Character.isUpperCase(plaintextChar)) {
-                int x = (plaintextChar + Character.toUpperCase(keyChar) - 2 * 'A') % 26;
+            if (Character.isUpperCase(plainTextChar)) {
+                int x = (plainTextChar + Character.toUpperCase(keyChar) - 2 * 'A') % 26;
                 x += 'A';
-                ciphertext.append((char) x);
-            } else if (Character.isLowerCase(plaintextChar)) {
-                int x = (plaintextChar + Character.toUpperCase(keyChar) - 2 * 'a') % 26;
+                cipherText.append((char) x);
+            } else if (Character.isLowerCase(plainTextChar)) {
+                int x = (plainTextChar + Character.toUpperCase(keyChar) - 2 * 'a') % 26;
                 x += 'a';
-                ciphertext.append((char) x);
+                cipherText.append((char) x);
             } else {
-                ciphertext.append(plaintextChar);
+                cipherText.append(plainTextChar);
             }
         }
-        return ciphertext.toString();
+        return cipherText.toString();
     }
-    public static String decrypt(String ciphertext, String key) {
-        StringBuilder plaintext = new StringBuilder();
+    public static String decrypt(String cipherText, String key) {
+        StringBuilder plainText = new StringBuilder();
 
-        for (int i = 0; i < ciphertext.length(); i++) {
-            char ciphertextChar = plaintext.charAt(i);
+        for (int i = 0; i < cipherText.length(); i++) {
+            char cipherTextChar = plainText.charAt(i);
             char keyChar = key.charAt(i);
 
-            if (Character.isUpperCase(ciphertextChar)) {
-                int x = (ciphertextChar - Character.toUpperCase(keyChar) + 26) % 26;
+            if (Character.isUpperCase(cipherTextChar)) {
+                int x = (cipherTextChar - Character.toUpperCase(keyChar) + 26) % 26;
                 x += 'A';
-                plaintext.append((char) x);
-            } else if (Character.isLowerCase(ciphertextChar)) {
-                int x = (ciphertextChar - Character.toUpperCase(keyChar) + 26) % 26;
+                plainText.append((char) x);
+            } else if (Character.isLowerCase(cipherTextChar)) {
+                int x = (cipherTextChar - Character.toUpperCase(keyChar) + 26) % 26;
                 x += 'a';
-                plaintext.append((char) x);
+                plainText.append((char) x);
             } else {
-                plaintext.append(ciphertextChar);
+                plainText.append(cipherTextChar);
             }
         }
-        return plaintext.toString();
+        return plainText.toString();
     }
 
     public static void main(String[] args) {
@@ -58,31 +58,31 @@ class VigenereCipher {
 
         String function = question.nextLine();
 
-        String plaintext = "";
-        String ciphertext = "";
+        String plainText = "";
+        String cipherText = "";
         String key = "";
 
         if (function.contains("encrypt")) {
             System.out.println("Enter the plaintext that you would like to encrypt:");
-            plaintext = question.nextLine();
+            plainText = question.nextLine();
 
             System.out.println("Enter the key you would like to use for encryption:");
             key = question.nextLine();
 
-            System.out.println("Encrypting " + plaintext + " ...");
+            System.out.println("Encrypting " + plainText + " ...");
 
-            String encryptedText = encrypt(plaintext, key);
+            String encryptedText = encrypt(plainText, key);
             System.out.println("Encrypted Text: " + encryptedText);
         } else if (function.contains("decrypt")) {
             System.out.println("Enter the ciphertext that you would like to decrypt:");
-            ciphertext = question.nextLine();
+            cipherText = question.nextLine();
 
             System.out.println("Enter the key used for encryption:");
             key = question.nextLine();
 
-            System.out.println("Decrypting " + ciphertext + " ...");
+            System.out.println("Decrypting " + cipherText + " ...");
 
-            String decryptedText = decrypt(ciphertext, key);
+            String decryptedText = decrypt(cipherText, key);
             System.out.println("Decrypted Text: " + decryptedText);
         } else {
             System.out.println("Error: please re-run and try again");
