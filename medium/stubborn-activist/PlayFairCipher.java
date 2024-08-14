@@ -3,57 +3,34 @@ import java.util.Scanner;
 public class PlayfairCipher {
 
     private static char[][] keyMatrix = new char[5][5];
-    private static String key = "";
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Get operation from user
-        System.out.println("Playfair Cipher 🧑‍💻");
-        System.out.println("Type 'encrypt' to Encrypt or 'decrypt' to Decrypt:");
-        String operation = scanner.nextLine().trim().toLowerCase();
-
-        // Get key and text from user
-        System.out.print("Enter the key: ");
-        key = scanner.nextLine().toUpperCase();
-        System.out.print("Enter the text: ");
-        String text = scanner.nextLine().toUpperCase();
-
-        scanner.close();
-        // Generate the key matrix
+    public static StringBuffer encrypt(String plainText, String key) {
         generateKeyMatrix(key);
-
-        // Perform the chosen operation
-        String result;
-        if ("encrypt".equals(operation)) {
-            result = encrypt(text);
-        } else if ("decrypt".equals(operation)) {
-            result = decrypt(text);
-        } else {
-            System.out.println("Invalid operation.");
-            return;
-        }
-        // Display the result
-        System.out.println("Result: " + result);
+        StringBuffer processedText = preprocessText(plainText);
+        return cipher(processedText, true);
     }
 
-    private static void generateKeyMatrix(String key) {
-        StringBuilder keyString = new StringBuilder();
+    public static StringBuffer decrypt(String cipherText, String key) {
+        generateKeyMatrix(key);
+        return cipher(new StringBuffer(cipherText), false);
+    }
 
-        // Remove duplicates from key and append the remaining alphabet
+    private static void generateKeyMatrix(String key, char omitLetter, char replaceLetter) {
+        StringBuilder keyString = new StringBuilder();
+        key = key.toUpperCase().replace(omitLetter, replaceLetter);
+
         for (char c : key.toCharArray()) {
-            if (c != 'J' && keyString.indexOf(String.valueOf(c)) == -1) {
+            if (keyString.indexOf(String.valueOf(c)) == -1 && Character.isLetter(c)) {
                 keyString.append(c);
             }
         }
 
         for (char c = 'A'; c <= 'Z'; c++) {
-            if (c != 'J' && keyString.indexOf(String.valueOf(c)) == -1) {
+            if (c != omitLetter && keyString.indexOf(String.valueOf(c)) == -1) {
                 keyString.append(c);
             }
         }
 
-        // Fill the key matrix
         int index = 0;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -62,9 +39,9 @@ public class PlayfairCipher {
         }
     }
 
-    private static String preprocessText(String text) {
-        text = text.replaceAll("[^A-Z]", "").replace("J", "I");
-        StringBuilder processedText = new StringBuilder();
+    private static StringBuffer preprocessText(String text) {
+        text = text.toUpperCase().replaceAll("[^A-Z]", "").replace("J", "I");
+        StringBuffer processedText = new StringBuffer();
 
         for (int i = 0; i < text.length(); i += 2) {
             char first = text.charAt(i);
@@ -82,20 +59,11 @@ public class PlayfairCipher {
             processedText.append('X');
         }
 
-        return processedText.toString();
+        return processedText;
     }
 
-    private static String encrypt(String plaintext) {
-        plaintext = preprocessText(plaintext);
-        return cipher(plaintext, true);
-    }
-
-    private static String decrypt(String ciphertext) {
-        return cipher(ciphertext, false);
-    }
-
-    private static String cipher(String text, boolean encrypt) {
-        StringBuilder result = new StringBuilder();
+    private static StringBuffer cipher(StringBuffer text, boolean encrypt) {
+        StringBuffer result = new StringBuffer();
 
         for (int i = 0; i < text.length(); i += 2) {
             char first = text.charAt(i);
@@ -105,21 +73,18 @@ public class PlayfairCipher {
             int[] pos2 = findPosition(second);
 
             if (pos1[0] == pos2[0]) {
-                // Same row
                 result.append(keyMatrix[pos1[0]][(pos1[1] + (encrypt ? 1 : 4)) % 5]);
                 result.append(keyMatrix[pos2[0]][(pos2[1] + (encrypt ? 1 : 4)) % 5]);
             } else if (pos1[1] == pos2[1]) {
-                // Same column
                 result.append(keyMatrix[(pos1[0] + (encrypt ? 1 : 4)) % 5][pos1[1]]);
                 result.append(keyMatrix[(pos2[0] + (encrypt ? 1 : 4)) % 5][pos2[1]]);
             } else {
-                // Rectangle swap
                 result.append(keyMatrix[pos1[0]][pos2[1]]);
                 result.append(keyMatrix[pos2[0]][pos1[1]]);
             }
         }
 
-        return result.toString();
+        return result;
     }
 
     private static int[] findPosition(char c) {
@@ -131,6 +96,51 @@ public class PlayfairCipher {
             }
         }
         return null; // Should never happen
+    }
+
+    public static void main(String[] args) {
+        Scanner question = new Scanner(System.in);
+        System.out.println("Do you want to encrypt or decrypt text? (encrypt/decrypt)");
+
+        String function = question.nextLine();
+        String plainText = "";
+        String cipherText = "";
+
+        String key = "";
+        Character omitLetter = null;
+        Character replaceLetter = null;
+
+        if (function.contains("encrypt")) {
+            System.out.println("Enter the plaintext that you would like to encrypt:");
+            plainText = question.nextLine();
+
+            System.out.println("Enter the key you would like to use for encryption:");
+            key = question.nextLine();
+
+            System.out.println("Enter the letter to omit from the key (default is J):");
+            omitLetter = question.next().charAt(0);
+            System.out.println("Enter the letter to replace the omitted letter (default is I):");
+            replaceLetter = question.next().charAt(0);
+
+            System.out.println("Encrypting '" + plainText + "' ...");
+
+            StringBuffer encryptedText = encrypt(plainText, key);
+            System.out.println("Encrypted Text: " + encryptedText);
+        } else if (function.contains("decrypt")) {
+            System.out.println("Enter the ciphertext that you would like to decrypt:");
+            cipherText = question.nextLine();
+
+            System.out.println("Enter the key used for encryption:");
+            key = question.nextLine();
+
+            System.out.println("Decrypting '" + cipherText + "' ...");
+
+            StringBuffer decryptedText = decrypt(cipherText, key);
+            System.out.println("Decrypted Text: " + decryptedText);
+        } else {
+            System.out.println("Error: please re-run and try again");
+        }
+        question.close();
     }
 }
 
