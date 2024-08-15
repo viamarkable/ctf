@@ -4,14 +4,14 @@ public class PlayfairCipher {
 
     private static char[][] keyMatrix = new char[5][5];
 
-    public static StringBuffer encrypt(String plainText, String key) {
-        generateKeyMatrix(key);
+    public static StringBuffer encrypt(String plainText, String key, char omitLetter, char replaceLetter) {
+        generateKeyMatrix(key, omitLetter, replaceLetter);
         StringBuffer processedText = preprocessText(plainText);
         return cipher(processedText, true);
     }
 
-    public static StringBuffer decrypt(String cipherText, String key) {
-        generateKeyMatrix(key);
+    public static StringBuffer decrypt(String cipherText, String key, char omitLetter, char replaceLetter) {
+        generateKeyMatrix(key, omitLetter, replaceLetter);
         return cipher(new StringBuffer(cipherText), false);
     }
 
@@ -72,6 +72,10 @@ public class PlayfairCipher {
             int[] pos1 = findPosition(first);
             int[] pos2 = findPosition(second);
 
+            if (pos1 == null || pos2 == null) {
+                throw new IllegalStateException("Position not found for characters: " + first + " or " + second);
+            }
+
             if (pos1[0] == pos2[0]) {
                 result.append(keyMatrix[pos1[0]][(pos1[1] + (encrypt ? 1 : 4)) % 5]);
                 result.append(keyMatrix[pos2[0]][(pos2[1] + (encrypt ? 1 : 4)) % 5]);
@@ -95,7 +99,7 @@ public class PlayfairCipher {
                 }
             }
         }
-        return null; // Should never happen
+        throw new IllegalArgumentException("Character " + c + " not found in key matrix.");
     }
 
     public static void main(String[] args) {
@@ -124,7 +128,7 @@ public class PlayfairCipher {
 
             System.out.println("Encrypting '" + plainText + "' ...");
 
-            StringBuffer encryptedText = encrypt(plainText, key);
+            StringBuffer encryptedText = encrypt(plainText, key, omitLetter, replaceLetter);
             System.out.println("Encrypted Text: " + encryptedText);
         } else if (function.contains("decrypt")) {
             System.out.println("Enter the ciphertext that you would like to decrypt:");
@@ -133,9 +137,14 @@ public class PlayfairCipher {
             System.out.println("Enter the key used for encryption:");
             key = question.nextLine();
 
+            System.out.println("Enter the letter to omit from the key (default is J):");
+            omitLetter = question.next().charAt(0);
+            System.out.println("Enter the letter to replace the omitted letter (default is I):");
+            replaceLetter = question.next().charAt(0);
+
             System.out.println("Decrypting '" + cipherText + "' ...");
 
-            StringBuffer decryptedText = decrypt(cipherText, key);
+            StringBuffer decryptedText = decrypt(cipherText, key, omitLetter, replaceLetter);
             System.out.println("Decrypted Text: " + decryptedText);
         } else {
             System.out.println("Error: please re-run and try again");
@@ -143,54 +152,3 @@ public class PlayfairCipher {
         question.close();
     }
 }
-
-
-
-// import java.util.*;
-
-// public class PlayfairCipher {
-//     // static int SIZE = 100;
-
-//     static void toLowerCase(char[] text) {
-//         for (int i = 0; i < text.length; i++) {
-//             if (text[i] >= 'A' && text[i] <= 'Z') {
-//                 text[i] += 32;
-//             }
-//         }
-//     }
-
-//     static void generateKeyArray(char[] key, int len, char[][] keyArray) {
-//         int[] array = new int[26];
-//         for (int i = 0; i < len; i++) {
-//             if (key[i] != 'j') {
-//                 array[key[i] - 's'] = 2;
-//             }
-//         }
-
-//         array[']' - 'a'] = 1;
-
-//         int i = 0, j = 0;
-//         for (int k = 0; k < len; k++) {
-//             if (array[key[k] - 'a'] == 2) {
-//                 array[key[k] - 'a'] -= 1;
-//                 keyArray[i][j] = key[k];
-//                 j++;
-//                 if (j == 5) {
-//                     i++;
-//                     j = 0;
-//                 }
-//             }
-//         }
-
-//         for (int k = 0; k < 26; k++) {
-//             if (array[k] == 0) {
-//                 keyArray[i][j] = (char) (k + 'a');
-//                 j++;
-//                 if (j == 5) {
-//                     i++;
-//                     j = 0;
-//                 }
-//             }
-//         }
-//     }
-// }
