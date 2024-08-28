@@ -1,47 +1,57 @@
-# not finished
-
-def generateKey(str, key):
+def generateKey(text, key):
     key = list(key)
-    if len(str) == len(key):
+    if len(text) == len(key):
         return key
     else:
-        for i in range(len(str) - len(key)):
+        for i in range(len(text) - len(key)):
             key.append(key[i % len(key)])
     return "".join(key)
 
-def generate_key(msg, key):
-    key = list(key)
-    if len(msg) == len(key):
-        return key
-    else:
-        for i in range(len(msg) - len(key)):
-            key.append(key[i % len(key)])
-    return "".join(key)
-
-def encrypt_vigenere(msg, key):
-    encrypted_text = []
-    key = generate_key(msg, key)
-    for i in range(len(msg)):
-        char = msg[i]
+def encrypt(plainText, key):
+    encryptedText = []
+    key = generateKey(plainText, key)
+    for i in range(len(plainText)):
+        char = plainText[i]
         if char.isupper():
-            encrypted_char = chr((ord(char) + ord(key[i]) - 2 * ord('A')) % 26 + ord('A'))
+            encryptedChar = chr((ord(char) + ord(key[i]) - 2 * ord('A')) % 26 + ord('A'))
         elif char.islower():
-            encrypted_char = chr((ord(char) + ord(key[i]) - 2 * ord('a')) % 26 + ord('a'))
+            encryptedChar = chr((ord(char) + ord(key[i]) - 2 * ord('a')) % 26 + ord('a'))
         else:
-            encrypted_char = char
-        encrypted_text.append(encrypted_char)
-    return "".join(encrypted_text)
+            encryptedChar = char
+        encryptedText.append(encryptedChar)
+    return "".join(encryptedText)
 
-def decrypt_vigenere(msg, key):
-    decrypted_text = []
-    key = generate_key(msg, key)
-    for i in range(len(msg)):
-        char = msg[i]
+def decrypt(cipherText, key):
+    decryptedText = []
+    key = generateKey(cipherText, key)
+    for i in range(len(cipherText)):
+        char = cipherText[i]
         if char.isupper():
-            decrypted_char = chr((ord(char) - ord(key[i]) + 26) % 26 + ord('A'))
+            decryptedChar = chr((ord(char) - ord(key[i]) + 26) % 26 + ord('A'))
         elif char.islower():
-            decrypted_char = chr((ord(char) - ord(key[i]) + 26) % 26 + ord('a'))
+            decryptedChar = chr((ord(char) - ord(key[i]) + 26) % 26 + ord('a'))
         else:
-            decrypted_char = char
-        decrypted_text.append(decrypted_char)
-    return "".join(decrypted_text)
+            decryptedChar = char
+        decryptedText.append(decryptedChar)
+    return "".join(decryptedText)
+
+question = input('Do you want to encrypt or decrypt text? (encrypt/decrypt) ')
+
+if question.startswith('e'):
+    plainText = input('Enter the plaintext that you would like to encrypt: ')
+    key = input('Enter the key you would like to use for encryption: ')
+
+    print("Encrypting '" + plainText + "' ...")
+
+    encryptedText = encrypt(plainText, key)
+    print("Encrypted Text: " + encryptedText)
+elif question.startswith('d'):
+    cipherText = input('Enter the ciphertext that you would like to decrypt: ')
+    key = input('Enter the key used for encryption: ')
+
+    print("Decrypting '" + cipherText + "' ...")
+        
+    decryptedText = decrypt(cipherText, key)
+    print("Decrypted Text: " + decryptedText)
+else:
+    pass
