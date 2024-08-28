@@ -1,5 +1,3 @@
-# bruteforce not working
-
 def encrypt(plainText, key):
     result = ""
 
