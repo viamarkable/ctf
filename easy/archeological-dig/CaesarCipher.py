@@ -55,4 +55,4 @@ elif question == 'decrypt':
             key = i
             bruteForceResult = decrypt(cipherText, key)
 
-            print("Shift of " + (i+1) + ": " + bruteForceResult)
+            print("Shift of " + str(i) + ": " + bruteForceResult)
