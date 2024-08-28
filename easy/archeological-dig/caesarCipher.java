@@ -69,7 +69,7 @@ class CaesarCipher {
                 StringBuffer decryptedText = decrypt(cipherText, key);
                 System.out.println("Decrypted Text: " + decryptedText);
             } else {
-                System.out.println("Decrypting " + cipherText + " through brute force...");
+                System.out.println("Decrypting '" + cipherText + "'' through brute force...");
 
                 for (int i = 0; i < 26; i++) {
                     StringBuffer bruteForceResult = decrypt(cipherText, i);
