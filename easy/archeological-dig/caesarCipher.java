@@ -20,10 +20,10 @@ class CaesarCipher {
 
         for (int i = 0; i < cipherText.length(); i++) {
             if (Character.isUpperCase(cipherText.charAt(i))) {
-                char ch = (char) (((int) cipherText.charAt(i) + s - 65 + 26) % 26 + 65);
+                char ch = (char) (((int) cipherText.charAt(i) - s - 65 + 26) % 26 + 65);
                 result.append(ch);
             } else {
-                char ch = (char) (((int) cipherText.charAt(i) + s - 97 + 26) % 26 + 97);
+                char ch = (char) (((int) cipherText.charAt(i) - s - 97 + 26) % 26 + 97);
                 result.append(ch);
             }
         }
@@ -44,7 +44,7 @@ class CaesarCipher {
             System.out.println("Enter the plaintext that you would like to encrypt:");
             plainText = question.nextLine();
 
-            System.out.println("Enter the key you would like to use for encryption:");
+            System.out.println("Enter the shift you would like to use for encryption:");
             key = question.nextInt();
             question.nextLine();
 
@@ -56,11 +56,11 @@ class CaesarCipher {
             System.out.println("Enter the ciphertext that you would like to decrypt:");
             cipherText = question.nextLine();
 
-            System.out.println("Do you know the key that was used for encryption? (y/n)");
+            System.out.println("Do you know the shift that was used for encryption? (y/n)");
             String aKey = question.nextLine();
 
             if (aKey.contains("y")) {
-                System.out.println("Enter the key used for encryption:");
+                System.out.println("Enter the shift used for encryption:");
                 key = question.nextInt();
                 question.nextLine();
 
@@ -73,7 +73,7 @@ class CaesarCipher {
 
                 for (int i = 0; i < 26; i++) {
                     StringBuffer bruteForceResult = decrypt(cipherText, i);
-                    System.out.println("Key " + (i+1) + ": " + bruteForceResult);
+                    System.out.println("Shift of " + i + ": " + bruteForceResult);
                 }
             }
         } else {

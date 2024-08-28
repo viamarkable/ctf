@@ -1,3 +1,5 @@
+// not working
+
 import java.util.Scanner;
 
 public class PlayfairCipher {
@@ -111,8 +113,8 @@ public class PlayfairCipher {
         String cipherText = "";
 
         String key = "";
-        Character omitLetter = null;
-        Character replaceLetter = null;
+        Character omitLetter = 'j';
+        Character replaceLetter = 'i';
 
         if (function.contains("encrypt")) {
             System.out.println("Enter the plaintext that you would like to encrypt:");

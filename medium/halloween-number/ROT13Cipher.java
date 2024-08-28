@@ -20,10 +20,10 @@ class ROT13Cipher {
 
         for (int i = 0; i < cipherText.length(); i++) {
             if (Character.isUpperCase(cipherText.charAt(i))) {
-                char ch = (char) (((int) cipherText.charAt(i) + 13 - 65 + 26) % 26 + 65);
+                char ch = (char) (((int) cipherText.charAt(i) - 13 - 65 + 26) % 26 + 65);
                 result.append(ch);
             } else {
-                char ch = (char) (((int) cipherText.charAt(i) + 13 - 97 + 26) % 26 + 97);
+                char ch = (char) (((int) cipherText.charAt(i) - 13 - 97 + 26) % 26 + 97);
                 result.append(ch);
             }
         }

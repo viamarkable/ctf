@@ -1,15 +1,17 @@
+// not working
+
 import java.util.Scanner;
 
 class VigenereCipher {
-    public static String generateKey(String str, String key) {
-        int x = str.length();
-        for (int i = 0; ; i++) {
-            if (x==i) i = 0;
-            if (key.length() == str.length()) break;
-            key += (key.charAt(i));
-        }
-        return key;
-    }
+    // public static String generateKey(String str, String key) {
+    //     int x = str.length();
+    //     for (int i = 0; ; i++) {
+    //         if (x==i) i = 0;
+    //         if (key.length() == str.length()) break;
+    //         key += (key.charAt(i));
+    //     }
+    //     return key;
+    // }
     public static String encrypt(String plainText, String key) {
         StringBuilder cipherText = new StringBuilder();
         for (int i = 0; i < plainText.length(); i++) {
@@ -69,7 +71,7 @@ class VigenereCipher {
             System.out.println("Enter the key you would like to use for encryption:");
             key = question.nextLine();
 
-            System.out.println("Encrypting " + plainText + " ...");
+            System.out.println("Encrypting '" + plainText + "'' ...");
 
             String encryptedText = encrypt(plainText, key);
             System.out.println("Encrypted Text: " + encryptedText);

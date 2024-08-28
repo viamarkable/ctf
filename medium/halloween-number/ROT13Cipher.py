@@ -19,10 +19,10 @@ def decrypt(cipherText):
         char = cipherText[i]
 
         if (char.isupper()):
-            result += chr((ord(char) + 13 - 65 + 26) % 26 + 65)
+            result += chr((ord(char) - 13 - 65 + 26) % 26 + 65)
 
         else:
-            result += chr((ord(char) + 13 - 97 + 26) % 26 + 97)
+            result += chr((ord(char) - 13 - 97 + 26) % 26 + 97)
 
     return result
 
