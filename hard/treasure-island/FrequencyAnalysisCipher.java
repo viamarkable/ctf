@@ -1,77 +1,82 @@
 import java.util.*;
 
 class FrequencyAnalysisCipher{
+    public static void printString(String cipherText, int textLength) {
 
-static void printString(String S, int N)
-{
+	    String[] plaintext = new String[5];
+    	int freq[] = new int[26];
+    	int freqSorted[] = new int[26];
+    	int Used[] = new int[26];
+        
+        for (int i = 0; i < textLength; i++) {
+            if (cipherText.charAt(i) != ' ') {
+                freq[Character.toUpperCase(cipherText.charAt(i)) - 'A']++;
+            }
+        }
 
-	String []plaintext = new String[5];
+        for (int i = 0; i < 26; i++) {
+            freqSorted[i] = freq[i];
+        }
 
-	int freq[] = new int[26];
+        String T = "ETAOINSHRDLCUMWFGYPBVKJXQZ";
 
-	int freqSorted[] = new int[26];
+        Arrays.sort(freqSorted);
+        freqSorted= reverse(freqSorted);
 
-	int Used[] = new int[26];
+        char[] mappings = new char[26];
 
-	for (int i = 0; i < N; i++) {
-		if (S.charAt(i) != ' ') {
-			freq[S.charAt(i) - 'A']++;
-		}
-	}
+        for (int i = 0; i < 5; i++) {
+            int ch = -1;
 
-	for (int i = 0; i < 26; i++) {
-		freqSorted[i] = freq[i];
-	}
+            for (int j = 0; j < 26; j++) {
 
-	String T = "ETAOINSHRDLCUMWFGYPBVKJXQZ";
+                if (freqSorted[i] == freq[j] && Used[j] == 0) {
+                    Used[j] = 1;
+                    ch = j;
+                    mappings[ch] = T.charAt(i);
+                    break;
+                }
+            }
+            if (ch == -1)
+                break;
+            
+            int x = T.charAt(i) - 'A';
+            x = x - ch;
 
-	Arrays.sort(freqSorted);
-	freqSorted= reverse(freqSorted);
-	for (int i = 0; i < 5; i++) {
+            String curr = "";
 
-		int ch = -1;
+            for (int k = 0; k < textLength; k++) {
 
-		for (int j = 0; j < 26; j++) {
+                if (cipherText.charAt(k) == ' ') {
+                    curr += (char)' ';
+                    continue;
+                }
 
-			if (freqSorted[i] == freq[j] && Used[j] == 0) {
-				Used[j] = 1;
-				ch = j;
-				break;
-			}
-		}
-		if (ch == -1)
-			break;
+                int y = cipherText.charAt(k) - 'A';
+                y += x;
 
-		int x = T.charAt(i) - 'A';
-		
-		x = x - ch;
+                if (y < 0)
+                    y += 26;
+                if (y > 25)
+                    y -= 26;
 
-		String curr = "";
-
-		for (int k = 0; k < N; k++) {
-
-			if (S.charAt(k) == ' ') {
-				curr += (char)' ';
-				continue;
-			}
-
-			int y = S.charAt(k) - 'A';
-			y += x;
-
-			if (y < 0)
-				y += 26;
-			if (y > 25)
-				y -= 26;
-
-			curr += (char)('A' + y);
-		}
+                curr += (char)('A' + y);
+            }
 
 		plaintext[i] = curr;
 	}
+    
+    System.out.println("\nLetter mappings based on frequency analysis:");
+        for (int i = 0; i < 26; i++) {
+            if (mappings[i] != 0) {
+                System.out.println((char) ('A' + i) + " -> " + mappings[i]);
+            }
+        }
 
-	for (int i = 0; i < 5; i++) {
-		System.out.print(plaintext[i] +"\n");
-	}
+        System.out.println("\nPossible plaintexts:");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(plaintext[i] + "\n");
+        }
 }
 static int[] reverse(int a[]) {
 	int i, n = a.length, t;
@@ -82,48 +87,33 @@ static int[] reverse(int a[]) {
 	}
 	return a;
 }
+static void printFrequencies(int[] freq) {
+    List<Map.Entry<Character, Integer>> freqList = new ArrayList<>();
+
+    for (int i = 0; i < 26; i++) {
+        if (freq[i] > 0) {
+            freqList.add(new AbstractMap.SimpleEntry<>((char) ('A' + i), freq[i]));
+        }
+    }
+
+    freqList.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+
+    System.out.println("Frequencies of letters in the ciphertext (from highest to lowest):");
+    for (Map.Entry<Character, Integer> entry : freqList) {
+        System.out.println(entry.getKey() + ": " + entry.getValue());
+    }
+}
+
 public static void main(String[] args)
 {
-	Scanner question = new Scanner(System.in);
-        System.out.println("Do you want to encrypt or decrypt text? (encrypt/decrypt)");
+	Scanner input = new Scanner(System.in);
+        System.out.println("Enter the ciphertext to perform frequency analysis on: ");
+        String ciphertext = input.nextLine();
 
-        String function = question.nextLine();
+        System.out.println("Performing frequency analysis on '" + ciphertext + "' ...");
 
-        String plainText = "";
-        String cipherText = "";
-        String key = "";
+        printString(ciphertext, ciphertext.length());
 
-        if (function.contains("encrypt")) {
-            System.out.println("Enter the plaintext that you would like to encrypt:");
-            plainText = question.nextLine();
-
-            System.out.println("Enter the key you would like to use for encryption:");
-            key = question.nextLine();
-
-            System.out.println("Encrypting '" + plainText + "'' ...");
-
-            String encryptedText = encrypt(plainText, key);
-            System.out.println("Encrypted Text: " + encryptedText);
-        } else if (function.contains("decrypt")) {
-            System.out.println("Enter the ciphertext that you would like to decrypt:");
-            cipherText = question.nextLine();
-
-            System.out.println("Enter the key used for encryption:");
-            key = question.nextLine();
-
-            System.out.println("Decrypting " + cipherText + " ...");
-
-            String decryptedText = decrypt(cipherText, key);
-            System.out.println("Decrypted Text: " + decryptedText);
-        } else {
-            System.out.println("Error: please re-run and try again");
-        }
-        question.close();
-    
-    String S = "B TJNQMF NFTTBHF";
-	int N = S.length();
-
-	printString(S, N);
-
+        input.close();
 }
 }
