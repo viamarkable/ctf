@@ -11,7 +11,8 @@
         "hard/treasure-island",
         "hard/recipe-heist",
         "medium/halloween-number",
-        "medium/stubborn-activist"
+        "medium/stubborn-activist",
+        "medium/mysterious-email"
     ],
     "java.project.referencedLibraries": []
 }

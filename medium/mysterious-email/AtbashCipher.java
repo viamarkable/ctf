@@ -1,5 +1,3 @@
-package medium.mysterious-email;
-
 import java.util.*;
 
 public class AtbashCipher {
@@ -32,28 +30,50 @@ public class AtbashCipher {
         put('Z', 'A');
     }};
 
-    public static String useAtbash(String message)
+    public static String mirror(String message)
     {
         String cipher = "";
         for(char letter : message.toCharArray())
         {
-            // Checking for space
             if(letter != ' ')
             {
-                // Adds the corresponding letter from the lookup_table
                 cipher += Character.toLowerCase(lookup_table.get(Character.toUpperCase(letter)));
             }
             else
             {
-                // Adds space
                 cipher += ' ';
             }
         }
         return cipher;
     }
 
-    public static void main(String[] args)
-    {
-        // tbd
+    public static void main(String[] args) {
+        Scanner question = new Scanner(System.in);
+        System.out.println("Do you want to encrypt or decrypt text? (encrypt/decrypt)");
+
+        String function = question.nextLine();
+        String plainText = "";
+        String cipherText = "";
+
+        if (function.contains("encrypt")) {
+            System.out.println("Enter the plaintext that you would like to encrypt:");
+            plainText = question.nextLine();
+
+            System.out.println("Encrypting '" + plainText + "' ...");
+
+            String encryptedText = mirror(plainText);
+            System.out.println("Encrypted Text: " + encryptedText);
+        } else if (function.contains("decrypt")) {
+            System.out.println("Enter the ciphertext that you would like to decrypt:");
+            cipherText = question.nextLine();
+
+            System.out.println("Encrypting '" + cipherText + "' ...");
+
+            String decryptedText = mirror(cipherText);
+            System.out.println("Decrypted Text: " + decryptedText);
+        } else {
+            System.out.println("Error: please re-run and try again");
+        }
+        question.close();
     }
 }

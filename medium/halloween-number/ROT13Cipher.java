@@ -52,7 +52,7 @@ class ROT13Cipher {
 
             System.out.println("Encrypting '" + cipherText + "' ...");
 
-            StringBuffer decryptedText = encrypt(cipherText);
+            StringBuffer decryptedText = decrypt(cipherText);
             System.out.println("Decrypted Text: " + decryptedText);
         } else {
             System.out.println("Error: please re-run and try again");
