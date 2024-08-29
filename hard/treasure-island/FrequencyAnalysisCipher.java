@@ -1,3 +1,5 @@
+// somewhat inaccurate due to inability to recognize character strings (TH, THE, AND, etc.) probably will input later
+
 import java.util.*;
 
 class FrequencyAnalysisCipher{
