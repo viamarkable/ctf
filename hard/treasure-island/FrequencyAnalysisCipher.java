@@ -3,7 +3,7 @@ import java.util.*;
 class FrequencyAnalysisCipher{
     public static void printString(String cipherText, int textLength) {
 
-	    String[] plaintext = new String[5];
+	    String[] plaintext = new String[26];
     	int freq[] = new int[26];
     	int freqSorted[] = new int[26];
     	int Used[] = new int[26];
@@ -25,7 +25,7 @@ class FrequencyAnalysisCipher{
 
         char[] mappings = new char[26];
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 26; i++) {
             int ch = -1;
 
             for (int j = 0; j < 26; j++) {
@@ -74,7 +74,7 @@ class FrequencyAnalysisCipher{
         }
 
         System.out.println("\nPossible plaintexts:");
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 26; i++) {
             System.out.print(plaintext[i] + "\n");
         }
 }
