@@ -2,7 +2,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ColumnarTranspositionCipher {
-    static final String key = "HACK";
     static Map<Character, Integer> keyMap = new HashMap<>();
 
     static void setPermutationOrder() {
@@ -11,7 +10,7 @@ public class ColumnarTranspositionCipher {
         }
     }
 
-    public static String encryptMessage(String msg) {
+    public static String encryptMessage(String msg, String key) {
         int row, col;
         StringBuilder cipher = new StringBuilder();
 
@@ -92,8 +91,10 @@ public class ColumnarTranspositionCipher {
     public static void main(String[] args) {
         
         // tbd hehe
+        String msg = "hello";
+        String key = "hi";
 
-        String cipher = encryptMessage(msg);
+        String cipher = encryptMessage(msg, key);
         System.out.println("Encrypted Message: " + cipher);
 
         System.out.println("Decrypted Message: " + decryptMessage(cipher));
