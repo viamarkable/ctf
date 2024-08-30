@@ -16,6 +16,7 @@
     ],
     "java.project.referencedLibraries": [],
     "files.associations": {
-        "string": "cpp"
+        "string": "cpp",
+        "iostream": "cpp"
     }
 }
