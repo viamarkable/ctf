@@ -12,7 +12,8 @@
         "hard/recipe-heist",
         "medium/halloween-number",
         "medium/stubborn-activist",
-        "medium/mysterious-email"
+        "medium/mysterious-email",
+        "cipher-codes"
     ],
     "java.project.referencedLibraries": [],
     "files.associations": {
