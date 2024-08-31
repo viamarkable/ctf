@@ -1,8 +1,8 @@
 using System;
-using System.Collections.Generic;
+// using System.Collections.Generic;
 
 class AtbashCipher {
-    static Dictionary<char, char> lookup_table = new Dictionary<char, char>{
+    static Dictionary<char, char> lookup_table = new Dictionary<char, char> {
         { 'A', 'Z' }, 
         { 'B', 'Y' }, 
         { 'C', 'X' },
@@ -31,7 +31,7 @@ class AtbashCipher {
         { 'Z', 'A' }
     };
 
-    static string mirror(string message) {
+    public static String mirror(string message) {
         string cipher = "";
         foreach(char letter in message) {
             if (letter != ' ') {
@@ -44,13 +44,13 @@ class AtbashCipher {
         return cipher;
     }
 
-    static void Main() {
+    public static void Main(String[] args) {
         Console.WriteLine("Do you want to encrypt or decrypt text? (encrypt/decrypt)");
         string question = Console.ReadLine();
 
         switch(question) {
             case "encrypt";
-                Console.WriteLine("Enter the plaintext that you would like to encrypt:")
+                Console.WriteLine("Enter the plaintext that you would like to encrypt:");
                 string plaintext = Console.ReadLine();
 
                 Console.WriteLine("Encrypting '" + plaintext + "' ...");
@@ -59,7 +59,7 @@ class AtbashCipher {
                 Console.WriteLine("Encrypted Text: " + encryptedText);
                 break;
             case "decrypt";
-                Console.WriteLine("Enter the ciphertext that you would like to decrypt:")
+                Console.WriteLine("Enter the ciphertext that you would like to decrypt:");
                 string ciphertext = Console.ReadLine();
 
                 Console.WriteLine("Decrypting '" + ciphertext + "' ...");

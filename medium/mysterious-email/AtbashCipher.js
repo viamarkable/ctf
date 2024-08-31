@@ -43,13 +43,13 @@ function main() {
     var question = prompt("Do you want to encrypt or decrypt text? (encrypt/decrypt)");
 
     if (question.includes("encrypt")) {
-        var plaintext = prompt("Enter the plaintext that you would like to encrypt:")
+        var plaintext = prompt("Enter the plaintext that you would like to encrypt:");
         println("Encrypting '" + plaintext + "' ...");
 
         var encryptedText = mirror(plaintext);
         println("Encrypted Text: " + encryptedText);
     } else {
-        var ciphertext = prompt("Enter the ciphertext that you would like to decrypt:")
+        var ciphertext = prompt("Enter the ciphertext that you would like to decrypt:");
         println("Decrypting '" + ciphertext + "' ...");
 
         var decryptedText = mirror(ciphertext);
