@@ -4,6 +4,8 @@ import java.util.Map;
 public class ColumnarTranspositionCipher {
     static Map<Character, Integer> keyMap = new HashMap<>();
 
+    String key = "test";
+
     static void setPermutationOrder() {
         for (int i = 0; i < key.length(); i++) {
             keyMap.put(key.charAt(i), i);
@@ -49,7 +51,7 @@ public class ColumnarTranspositionCipher {
         return cipher.toString();
     }
 
-    public static String decryptMessage(String cipher) {
+    public static String decryptMessage(String cipher, String key) {
         int col = key.length();
 
         int row = (int) Math.ceil((double) cipher.length() / col);
@@ -97,6 +99,6 @@ public class ColumnarTranspositionCipher {
         String cipher = encryptMessage(msg, key);
         System.out.println("Encrypted Message: " + cipher);
 
-        System.out.println("Decrypted Message: " + decryptMessage(cipher));
+        System.out.println("Decrypted Message: " + decryptMessage(cipher, key));
     }
 }
