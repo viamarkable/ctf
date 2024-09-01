@@ -33,4 +33,31 @@ public class HillCipher {
 
     static void encrypt(String message, String key)
     {
-        
+        int [][]keyMatrix = new int[3][3];
+        getKeyMatrix(key, keyMatrix);
+
+        int [][]messageVector = new int[3][1];
+
+        for (int i = 0; i < 3; i++)
+            messageVector[i][0] = (message.charAt(i)) % 65;
+
+        int [][]cipherMatrix = new int[3][1];
+
+        encrypt(cipherMatrix, keyMatrix, messageVector);
+
+        String CipherText="";
+
+        for (int i = 0; i < 3; i++)
+            CipherText += (char)(cipherMatrix[i][0] + 65);
+
+        System.out.print(" Ciphertext:" + CipherText);
+    }
+
+    public static void main(String[] args) {
+        // all will be user inputs
+        String message = "tbd";
+        String key = "tbd";
+
+        encrypt(message, key);
+    }
+}
