@@ -21,3 +21,28 @@ Currently, this whole project is hosted on GitHub, but I do have plans for futur
 As a disclaimer, I am neither a pro cryptographer nor a pro coder, so this project is also a space for me to learn a lot about ciphers and (especially) coding solutions to said ciphers. This being said, please let me know if I've make a mistake anywhere and I'll do my best to resolve it as soon as possible.
 
 Thank you for participating in this project! I hope you enjoy the games.
+
+
+ADD ON README.md FOR ARCADE:
+
+How to run the code projects: 
+I currently do not have a site to host the code/cipher solvers, so right now, here are the steps you'll need to take to use them.
+
+First, open up a code editor like VSCode (which is what I'll be using).
+
+Create a file with the code that you want to run, or clone it from this repository.
+
+Then, run/debug the code, and answer its questions to use the cipher solver.
+
+Here's an example:
+
+For the CaesarCipher.java file, here's what I would do to run it.
+
+After opening it up, click 'run' as shown here:
+<img width="415" alt="image" src="https://github.com/user-attachments/assets/ad28cc68-6259-4773-8917-8ca99601fb3a">
+Then, to encrypt my text "helloworld" with a shift of 3, here's what I would input in the terminal:
+<img width="411" alt="image" src="https://github.com/user-attachments/assets/75bd76d8-c045-4051-adb2-2141a25efbc3">
+To decrypt my text, here's an example:
+<img width="406" alt="image" src="https://github.com/user-attachments/assets/d5118102-74db-4cc4-9797-5ed9215fa955">
+Or, if I wanted to use the special brute force function, here's what I would do:
+<img width="408" alt="image" src="https://github.com/user-attachments/assets/665e9308-d684-4d75-9a26-3bc45bdc0c10">
